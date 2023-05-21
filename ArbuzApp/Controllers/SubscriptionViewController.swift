@@ -46,7 +46,7 @@ class SubscriptionViewController: UIViewController {
     
     private func setupNavigationBar() {
         let logoImageView = UIImageView(image: UIImage(named: "logo"))
-        logoImageView.setDimensions(width: 144, height: 40)
+        logoImageView.setDimensions(width: 144, height: 36)
         let logoBarButtonItem = UIBarButtonItem(customView: logoImageView)
         
         let addressButton = UIBarButtonItem(title: userAddressText, style: .plain, target: self, action: #selector(addressButtonTapped))

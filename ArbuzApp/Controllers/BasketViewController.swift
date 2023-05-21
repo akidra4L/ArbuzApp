@@ -10,7 +10,7 @@ import UIKit
 class BasketViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.view.backgroundColor = Colors.mainBackground
+        self.navigationItem.title = "Корзина"
     }
 }
