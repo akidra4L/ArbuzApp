@@ -7,59 +7,76 @@
 
 import UIKit
 
-class CategoryCell: UITableViewCell {
-    
+class CategoryCell: UICollectionViewCell {
+
     public static let categoryIdentifier = "CategoryCell"
     public var category: Category? {
         didSet {
-            guard let category = category else { return }
-            categoryLabel.text = category.title
-            categoryImage.image = UIImage(named: category.image)
+            productCollectionView.reloadData()
         }
     }
+
+    private let productCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.backgroundColor = .clear
+        return collectionView
+    }()
     
-    private let separatorView: UIView = {
-        let separatorView = UIView()
-        separatorView.backgroundColor = .lightGray.withAlphaComponent(0.5)
-        return separatorView
-    } ()
-    
-    private let categoryLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .black
-        label.font = .systemFont(ofSize: 24, weight: .regular)
-        return label
-    } ()
-    
-    private let categoryImage: UIImageView = {
-        let image = UIImageView()
-        image.contentMode = .scaleToFill
-        return image
-    } ()
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
         setUI()
+        setupCollectionView()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func setUI() {
-        self.backgroundColor = .white
-        
-        [separatorView, categoryLabel, categoryImage].forEach { self.addSubview($0) }
+        backgroundColor = .white
+
+        addSubview(productCollectionView)
         setConstraints()
     }
-    
+
     private func setConstraints() {
-        categoryLabel.anchor(top: self.topAnchor, left: self.leftAnchor, paddingTop: 12, paddingLeft: 16)
-        categoryLabel.centerY(in: self)
-        
-        categoryImage.anchor(top: self.topAnchor, right: self.rightAnchor, paddingTop: 12, paddingRight: 0, width: 84, height: 84)
-        
-        separatorView.anchor(right: self.rightAnchor, bottom: self.bottomAnchor, left: self.leftAnchor, paddingRight: 16, paddingLeft: 16, height: 1)
+        productCollectionView.anchor(top: topAnchor, right: rightAnchor, bottom: bottomAnchor, left: leftAnchor, paddingTop: 8, paddingRight: 8, paddingBottom: 8, paddingLeft: 8)
+    }
+
+    private func setupCollectionView() {
+        productCollectionView.delegate = self
+        productCollectionView.dataSource = self
+        productCollectionView.register(ProductCell.self, forCellWithReuseIdentifier: ProductCell.productIdentifier)
+    }
+}
+
+extension CategoryCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return category?.products.count ?? 0
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCell.productIdentifier, for: indexPath) as? ProductCell else {
+            return UICollectionViewCell()
+        }
+
+        cell.product = category?.products[indexPath.item]
+
+        return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+            let cellWidth: CGFloat = 125
+            let cellHeight: CGFloat = collectionView.bounds.height - 16
+            return CGSize(width: cellWidth, height: cellHeight)
+        }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
     }
 }
