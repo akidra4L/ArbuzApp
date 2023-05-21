@@ -13,6 +13,11 @@ protocol EditAddressDelegate {
 
 class EditAddressViewController: UIViewController {
     
+    var address: String = "" {
+        didSet {
+            addressTextField.text = address
+        }
+    }
     var delegate: EditAddressDelegate?
     
     private var titleLabel: UILabel = {
@@ -85,7 +90,7 @@ class EditAddressViewController: UIViewController {
         
         addressLabel.anchor(top: titleLabel.bottomAnchor, left: backgroundView.leftAnchor, paddingTop: 16, paddingLeft: 16)
         
-        addressTextField.anchor(top: addressLabel.bottomAnchor, left: backgroundView.leftAnchor, paddingTop: 12, paddingLeft: 16, width: 250)
+        addressTextField.anchor(top: addressLabel.bottomAnchor, left: backgroundView.leftAnchor, paddingTop: 8, paddingLeft: 16, width: 250)
         
         saveButton.anchor(top: addressTextField.bottomAnchor, paddingTop: 32, width: 100, height: 32)
         saveButton.centerX(in: backgroundView)
