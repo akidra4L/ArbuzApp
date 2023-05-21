@@ -21,8 +21,8 @@ class MainViewController: UITabBarController {
         guard let items = self.tabBar.items else { return }
         
         for i in 0...1 {
-            items[i].title = TabBarItem.tabBarItems[i].title
             items[i].image = UIImage(systemName: TabBarItem.tabBarItems[i].icon)
         }
+        self.tabBar.tintColor = UIColor(named: "Accent")
     }
 }

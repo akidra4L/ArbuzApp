@@ -17,11 +17,14 @@ class SubscriptionViewController: UIViewController {
         }
     }
     
-    private let categoriesTableView: UITableView = {
-        let tv = UITableView()
-        tv.separatorStyle = .none
-        return tv
-    } ()
+    private let categoriesCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.backgroundColor = .clear
+        return collectionView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +33,7 @@ class SubscriptionViewController: UIViewController {
         customBackButton()
         setupNavigationBar()
         setConstraints()
-        setupTableView()
+        setupCollectionView()
     }
     
     private func customBackButton() {
@@ -39,9 +42,9 @@ class SubscriptionViewController: UIViewController {
     }
     
     private func setConstraints() {
-        [categoriesTableView].forEach { self.view.addSubview($0) }
+        view.addSubview(categoriesCollectionView)
         
-        categoriesTableView.anchor(top: self.view.topAnchor, right: self.view.rightAnchor, bottom: self.view.bottomAnchor, left: self.view.leftAnchor, paddingTop: 180, paddingRight: 16, paddingLeft: 16)
+        categoriesCollectionView.anchor(top: self.view.topAnchor, right: self.view.rightAnchor, bottom: self.view.bottomAnchor, left: self.view.leftAnchor, paddingTop: 150, paddingRight: 8, paddingLeft: 8)
     }
     
     private func setupNavigationBar() {
@@ -56,10 +59,10 @@ class SubscriptionViewController: UIViewController {
         navigationItem.rightBarButtonItem = addressButton
     }
     
-    private func setupTableView() {
-        categoriesTableView.delegate = self
-        categoriesTableView.dataSource = self
-        categoriesTableView.register(CategoryCell.self, forCellReuseIdentifier: CategoryCell.categoryIdentifier)
+    private func setupCollectionView() {
+        categoriesCollectionView.delegate = self
+        categoriesCollectionView.dataSource = self
+        categoriesCollectionView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.categoryIdentifier)
     }
     
     @objc private func addressButtonTapped() {
@@ -77,33 +80,39 @@ extension SubscriptionViewController: EditAddressDelegate {
     }
 }
 
-extension SubscriptionViewController: UITableViewDataSource {
+extension SubscriptionViewController: UICollectionViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categories.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CategoryCell.categoryIdentifier, for: indexPath) as? CategoryCell else { return UITableViewCell() }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.categoryIdentifier, for: indexPath) as? CategoryCell else {
+            return UICollectionViewCell()
+        }
         
-        cell.category = categories[indexPath.row]
+        cell.category = categories[indexPath.item]
         
         return cell
     }
 }
 
-extension SubscriptionViewController: UITableViewDelegate {
+extension SubscriptionViewController: UICollectionViewDelegateFlowLayout {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let productsViewController = ProductsViewController()
-        productsViewController.products = categories[indexPath.row].products
-        
-        self.navigationController?.pushViewController(productsViewController, animated: true)
-        
-        categoriesTableView.deselectRow(at: indexPath, animated: true)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = collectionView.frame.width - 32
+        return CGSize(width: width, height: 250)
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 16
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
     }
 }
