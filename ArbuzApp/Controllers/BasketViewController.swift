@@ -13,7 +13,7 @@ class BasketViewController: UIViewController {
     
     init() {
         super.init(nibName: nil, bundle: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(productAddedToBasket(_:)), name: .productAddedToBasketNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(productAddedToBasket(_:)), name: .basketChangedNotification, object: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -26,8 +26,8 @@ class BasketViewController: UIViewController {
     }
     
     @objc private func productAddedToBasket(_ notification: Notification) {
-        if let product = notification.userInfo?["product"] as? Product {
-            basketProducts.append(product)
+        if notification.userInfo?["product"] is Product {
+            basketProducts = BasketManager.basketProducts
         }
     }
 }
