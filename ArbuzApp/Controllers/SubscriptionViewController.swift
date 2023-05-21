@@ -90,14 +90,17 @@ extension SubscriptionViewController: UITableViewDataSource {
         
         return cell
     }
-    
-    
 }
 
 extension SubscriptionViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("click")
+        let productsViewController = ProductsViewController()
+        productsViewController.products = categories[indexPath.row].products
+        
+        self.navigationController?.pushViewController(productsViewController, animated: true)
+        
+        categoriesTableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
