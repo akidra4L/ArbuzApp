@@ -17,7 +17,7 @@ class SubscriptionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = Colors.mainBackground
         
         customBackButton()
         setupNavigationBar()

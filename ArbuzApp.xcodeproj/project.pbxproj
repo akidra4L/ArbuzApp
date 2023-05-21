@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		157610022A19E2A700DF0969 /* BasketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157610012A19E2A700DF0969 /* BasketViewController.swift */; };
+		157610072A19E33B00DF0969 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157610062A19E33B00DF0969 /* MainViewController.swift */; };
+		157A32B02A192AB900753E1B /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157A32AF2A192AB900753E1B /* TabBarItem.swift */; };
 		158A787D2A18AFEF0000AAF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158A787C2A18AFEF0000AAF1 /* AppDelegate.swift */; };
 		158A78862A18AFF00000AAF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 158A78852A18AFF00000AAF1 /* Assets.xcassets */; };
 		158A78892A18AFF00000AAF1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 158A78872A18AFF00000AAF1 /* LaunchScreen.storyboard */; };
@@ -17,6 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		157610012A19E2A700DF0969 /* BasketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketViewController.swift; sourceTree = "<group>"; };
+		157610062A19E33B00DF0969 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		157A32AF2A192AB900753E1B /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		158A78792A18AFEF0000AAF1 /* ArbuzApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArbuzApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		158A787C2A18AFEF0000AAF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		158A78852A18AFF00000AAF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -39,6 +45,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		157610032A19E30800DF0969 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				158A78932A18B9650000AAF1 /* CustomConstraints.swift */,
+				158A78972A18CB1A0000AAF1 /* Colors.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		157A32B12A192ABB00753E1B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				157A32AF2A192AB900753E1B /* TabBarItem.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		158A78702A18AFEF0000AAF1 = {
 			isa = PBXGroup;
 			children = (
@@ -59,11 +82,11 @@
 			isa = PBXGroup;
 			children = (
 				158A787C2A18AFEF0000AAF1 /* AppDelegate.swift */,
-				158A78932A18B9650000AAF1 /* CustomConstraints.swift */,
-				158A78972A18CB1A0000AAF1 /* Colors.swift */,
+				157A32B12A192ABB00753E1B /* Models */,
 				158A78922A18B8A30000AAF1 /* Controllers */,
-				158A78852A18AFF00000AAF1 /* Assets.xcassets */,
+				157610032A19E30800DF0969 /* Helpers */,
 				158A78872A18AFF00000AAF1 /* LaunchScreen.storyboard */,
+				158A78852A18AFF00000AAF1 /* Assets.xcassets */,
 				158A788A2A18AFF00000AAF1 /* Info.plist */,
 			);
 			path = ArbuzApp;
@@ -74,6 +97,8 @@
 			children = (
 				158A78902A18B8760000AAF1 /* SubscriptionViewController.swift */,
 				158A78952A18BAEF0000AAF1 /* EditAddressViewController.swift */,
+				157610012A19E2A700DF0969 /* BasketViewController.swift */,
+				157610062A19E33B00DF0969 /* MainViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -148,11 +173,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				157A32B02A192AB900753E1B /* TabBarItem.swift in Sources */,
 				158A78912A18B8760000AAF1 /* SubscriptionViewController.swift in Sources */,
+				157610022A19E2A700DF0969 /* BasketViewController.swift in Sources */,
 				158A78982A18CB1A0000AAF1 /* Colors.swift in Sources */,
 				158A78962A18BAEF0000AAF1 /* EditAddressViewController.swift in Sources */,
 				158A78942A18B9650000AAF1 /* CustomConstraints.swift in Sources */,
 				158A787D2A18AFEF0000AAF1 /* AppDelegate.swift in Sources */,
+				157610072A19E33B00DF0969 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,6 +15,13 @@ class EditAddressViewController: UIViewController {
     
     var delegate: EditAddressDelegate?
     
+    private var titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Адрес доставки"
+        label.font = .systemFont(ofSize: 18)
+        return label
+    } ()
+    
     private var backgroundView: UIView = {
         let background = UIView()
         background.backgroundColor = .white
@@ -30,7 +37,7 @@ class EditAddressViewController: UIViewController {
     
     private let addressLabel: UILabel = {
         let label = UILabel()
-        label.text = "Адрес доставки"
+        label.text = "Адрес"
         label.font = .systemFont(ofSize: 16)
         label.textColor = .lightGray
         return label
@@ -67,13 +74,16 @@ class EditAddressViewController: UIViewController {
     }
     
     private func setUI() {
-        [backgroundView, closeButton, addressLabel, addressTextField, saveButton].forEach { self.view.addSubview($0) }
+        [backgroundView, titleLabel, closeButton, addressLabel, addressTextField, saveButton].forEach { self.view.addSubview($0) }
         
         backgroundView.anchor(right: view.rightAnchor, bottom: view.bottomAnchor, left: view.leftAnchor, paddingRight: 0, paddingBottom: 0, paddingLeft: 0, height: 212)
         
+        titleLabel.anchor(top: backgroundView.topAnchor, paddingTop: 16)
+        titleLabel.centerX(in: backgroundView)
+        
         closeButton.anchor(top: backgroundView.topAnchor, right: backgroundView.rightAnchor, paddingTop: 16, paddingRight: 16)
         
-        addressLabel.anchor(top: backgroundView.topAnchor, left: backgroundView.leftAnchor, paddingTop: 42, paddingLeft: 16)
+        addressLabel.anchor(top: titleLabel.bottomAnchor, left: backgroundView.leftAnchor, paddingTop: 16, paddingLeft: 16)
         
         addressTextField.anchor(top: addressLabel.bottomAnchor, left: backgroundView.leftAnchor, paddingTop: 12, paddingLeft: 16, width: 250)
         
