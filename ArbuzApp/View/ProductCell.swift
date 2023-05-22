@@ -15,7 +15,7 @@ class ProductCell: UICollectionViewCell {
             guard let product = product else { return }
             productLabel.text = product.name
             productImage.image = UIImage(named: product.image)
-            priceLabel.text = "\(product.price)₸"
+            priceLabel.text = "\(product.price) ₸"
         }
     }
     
@@ -25,7 +25,7 @@ class ProductCell: UICollectionViewCell {
         }
     }
     
-    private var isProductSelected: Bool = false {
+    public var isProductSelected: Bool = false {
         didSet {
             if numberOfSelectedProduct > 0 {
                 priceLabel.isHidden = true

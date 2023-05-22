@@ -9,4 +9,5 @@ import UIKit
 
 extension Notification.Name {
     static let basketChangedNotification = Notification.Name("BasketChangedNotification")
+    static let didDeleteItemFromBasket = Notification.Name("DidDeleteItemFromBasket")
 }

@@ -8,7 +8,11 @@
 import UIKit
 
 struct BasketManager {
-    static var basketProducts: [Product] = [Product]()
+    static var basketProducts: [Product] = [] {
+        didSet {
+            
+        }
+    }
     
     static func addProductToBasket(_ product: Product) {
         basketProducts.append(product)

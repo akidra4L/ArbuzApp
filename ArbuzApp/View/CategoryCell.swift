@@ -12,9 +12,16 @@ class CategoryCell: UICollectionViewCell {
     public static let categoryIdentifier = "CategoryCell"
     public var category: Category? {
         didSet {
+            categoryLabel.text = category?.title
             productCollectionView.reloadData()
         }
     }
+    
+    private let categoryLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 24, weight: .semibold)
+        return label
+    } ()
 
     private let productCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -23,7 +30,7 @@ class CategoryCell: UICollectionViewCell {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = .clear
         return collectionView
-    }()
+    } ()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,12 +46,14 @@ class CategoryCell: UICollectionViewCell {
     private func setUI() {
         backgroundColor = .white
 
-        addSubview(productCollectionView)
+        [productCollectionView, categoryLabel].forEach { self.addSubview($0) }
         setConstraints()
     }
 
     private func setConstraints() {
-        productCollectionView.anchor(top: topAnchor, right: rightAnchor, bottom: bottomAnchor, left: leftAnchor, paddingTop: 8, paddingRight: 8, paddingBottom: 8, paddingLeft: 8)
+        productCollectionView.anchor(top: topAnchor, right: rightAnchor, bottom: bottomAnchor, left: leftAnchor, paddingTop: 36, paddingRight: 8, paddingBottom: 12, paddingLeft: 8)
+        
+        categoryLabel.anchor(top: topAnchor, bottom: productCollectionView.topAnchor, left: leftAnchor, paddingTop: 4, paddingLeft: 8)
     }
 
     private func setupCollectionView() {

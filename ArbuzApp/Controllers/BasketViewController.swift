@@ -9,7 +9,41 @@ import UIKit
 
 class BasketViewController: UIViewController {
     
-    private var basketProducts: [Product] = BasketManager.basketProducts
+    private var basketProducts: [Product] = [] {
+        didSet {
+            if basketProducts.isEmpty {
+                emptyView.isHidden = false
+                basketTableView.isHidden = true
+                registerOrderButton.isHidden = true
+                basketTableView.reloadData()
+            } else {
+                emptyView.isHidden = true
+                basketTableView.isHidden = false
+                basketTableView.reloadData()
+                registerOrderButton.isHidden = false
+                
+                registerOrderButton.setTitle("Перейти к оплате\n\(getTotalSum())₸", for: .normal)
+            }
+        }
+    }
+    
+    private let emptyView = EmptyBasketView()
+    
+    private let basketTableView: UITableView = {
+        let tv = UITableView()
+        tv.separatorStyle = .none
+        return tv
+    } ()
+    
+    private let registerOrderButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = Colors.buttonColor?.withAlphaComponent(0.8)
+        button.layer.cornerRadius = 12
+        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
+        button.titleLabel?.numberOfLines = 2
+        button.titleLabel?.textAlignment = .center
+        return button
+    } ()
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -23,11 +57,75 @@ class BasketViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Colors.mainBackground
+        self.navigationItem.title = "Корзина"
+        
+        setUI()
+        setupTableView()
     }
     
     @objc private func productAddedToBasket(_ notification: Notification) {
         if notification.userInfo?["product"] is Product {
             basketProducts = BasketManager.basketProducts
         }
+    }
+    
+    private func setUI() {
+        [emptyView, basketTableView, registerOrderButton].forEach { self.view.addSubview($0) }
+        
+        emptyView.centerInView(in: self.view)
+        
+        basketTableView.anchor(top: self.view.topAnchor, right: self.view.rightAnchor, bottom: self.view.bottomAnchor, left: self.view.leftAnchor, paddingTop: 120, paddingRight: 16, paddingLeft: 16)
+        
+        registerOrderButton.anchor(right: self.view.rightAnchor, bottom: self.view.bottomAnchor, left: self.view.leftAnchor, paddingRight: 16, paddingBottom: 100, paddingLeft: 16, height: 62)
+    }
+    
+    private func setupTableView() {
+        basketTableView.delegate = self
+        basketTableView.dataSource = self
+        basketTableView.register(BasketCell.self, forCellReuseIdentifier: BasketCell.reuseIdentifier)
+        
+        if basketProducts.isEmpty {
+            basketTableView.isHidden = true
+            registerOrderButton.isHidden = true
+        }
+    }
+}
+
+extension BasketViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return basketProducts.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: BasketCell.reuseIdentifier, for: indexPath) as? BasketCell else { return UITableViewCell() }
+        
+        cell.product = basketProducts[indexPath.row]
+        cell.onDeleteButtonTapped = { [weak self] in
+            self?.deleteProduct(at: indexPath)
+        }
+        
+        return cell
+    }
+}
+
+extension BasketViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+}
+
+extension BasketViewController {
+    
+    private func getTotalSum() -> Double {
+        return basketProducts.reduce(0.0) { $0 + $1.price }
+    }
+    
+    private func deleteProduct(at indexPath: IndexPath) {
+        basketProducts.remove(at: indexPath.row)
+        basketTableView.reloadData()
+        
+        BasketManager.basketProducts = basketProducts
     }
 }
