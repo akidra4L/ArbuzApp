@@ -1,7 +1,7 @@
 # ArbuzApp
 
 <a href="https://github.com/akidra4L/ArbuzApp">
-  <img src="Assets/arbuz-logo.jpeg" alt="Logo" width="100%">
+  <img src="Assets/arbuz-logo.png" alt="Logo" width="100%">
 </a>
 
 <summary>Table of Contents</summary>
