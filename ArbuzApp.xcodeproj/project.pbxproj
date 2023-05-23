@@ -25,6 +25,11 @@
 		158A78942A18B9650000AAF1 /* CustomConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158A78932A18B9650000AAF1 /* CustomConstraints.swift */; };
 		158A78962A18BAEF0000AAF1 /* EditAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158A78952A18BAEF0000AAF1 /* EditAddressViewController.swift */; };
 		158A78982A18CB1A0000AAF1 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158A78972A18CB1A0000AAF1 /* Colors.swift */; };
+		15AB16F82A1CC1B400A22378 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AB16F72A1CC1B400A22378 /* CustomTextField.swift */; };
+		15AB16FB2A1CC21000A22378 /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AB16FA2A1CC21000A22378 /* OrderDetailViewController.swift */; };
+		15AB16FD2A1CC2C300A22378 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AB16FC2A1CC2C300A22378 /* CustomButton.swift */; };
+		15AB17012A1CC8AB00A22378 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AB17002A1CC8AB00A22378 /* Size.swift */; };
+		15AB17032A1CD3D000A22378 /* SuccessOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AB17022A1CD3D000A22378 /* SuccessOrderViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +53,11 @@
 		158A78932A18B9650000AAF1 /* CustomConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomConstraints.swift; sourceTree = "<group>"; };
 		158A78952A18BAEF0000AAF1 /* EditAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAddressViewController.swift; sourceTree = "<group>"; };
 		158A78972A18CB1A0000AAF1 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		15AB16F72A1CC1B400A22378 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		15AB16FA2A1CC21000A22378 /* OrderDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailViewController.swift; sourceTree = "<group>"; };
+		15AB16FC2A1CC2C300A22378 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		15AB17002A1CC8AB00A22378 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
+		15AB17022A1CD3D000A22378 /* SuccessOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessOrderViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +76,6 @@
 			children = (
 				154015142A1A5C0A00A61C57 /* CategoryCell.swift */,
 				154015172A1A642D00A61C57 /* ProductCell.swift */,
-				156A2C492A1B2A6700882908 /* EmptyBasketView.swift */,
 				156A2C4B2A1B318B00882908 /* BasketCell.swift */,
 			);
 			path = View;
@@ -79,6 +88,7 @@
 				158A78972A18CB1A0000AAF1 /* Colors.swift */,
 				154015202A1AA79600A61C57 /* BasketManager.swift */,
 				154015222A1AA9DE00A61C57 /* Extensions.swift */,
+				15AB17002A1CC8AB00A22378 /* Size.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -86,7 +96,6 @@
 		157A32B12A192ABB00753E1B /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				157A32AF2A192AB900753E1B /* TabBarItem.swift */,
 				1540150D2A1A509400A61C57 /* Product.swift */,
 				1540150F2A1A510E00A61C57 /* Category.swift */,
 			);
@@ -113,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				158A787C2A18AFEF0000AAF1 /* AppDelegate.swift */,
+				15AB16F92A1CC1BA00A22378 /* Components */,
 				154015162A1A5C0F00A61C57 /* View */,
 				157A32B12A192ABB00753E1B /* Models */,
 				158A78922A18B8A30000AAF1 /* Controllers */,
@@ -131,8 +141,21 @@
 				158A78902A18B8760000AAF1 /* SubscriptionViewController.swift */,
 				158A78952A18BAEF0000AAF1 /* EditAddressViewController.swift */,
 				157610012A19E2A700DF0969 /* BasketViewController.swift */,
+				15AB16FA2A1CC21000A22378 /* OrderDetailViewController.swift */,
+				15AB17022A1CD3D000A22378 /* SuccessOrderViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		15AB16F92A1CC1BA00A22378 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				15AB16F72A1CC1B400A22378 /* CustomTextField.swift */,
+				156A2C492A1B2A6700882908 /* EmptyBasketView.swift */,
+				157A32AF2A192AB900753E1B /* TabBarItem.swift */,
+				15AB16FC2A1CC2C300A22378 /* CustomButton.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,6 +228,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15AB16FB2A1CC21000A22378 /* OrderDetailViewController.swift in Sources */,
+				15AB16FD2A1CC2C300A22378 /* CustomButton.swift in Sources */,
 				157A32B02A192AB900753E1B /* TabBarItem.swift in Sources */,
 				156A2C4A2A1B2A6700882908 /* EmptyBasketView.swift in Sources */,
 				154015102A1A510E00A61C57 /* Category.swift in Sources */,
@@ -213,14 +238,17 @@
 				156A2C4C2A1B318B00882908 /* BasketCell.swift in Sources */,
 				157610022A19E2A700DF0969 /* BasketViewController.swift in Sources */,
 				158A78982A18CB1A0000AAF1 /* Colors.swift in Sources */,
+				15AB16F82A1CC1B400A22378 /* CustomTextField.swift in Sources */,
 				158A78962A18BAEF0000AAF1 /* EditAddressViewController.swift in Sources */,
 				158A78942A18B9650000AAF1 /* CustomConstraints.swift in Sources */,
 				158A787D2A18AFEF0000AAF1 /* AppDelegate.swift in Sources */,
 				154015182A1A642D00A61C57 /* ProductCell.swift in Sources */,
 				157610072A19E33B00DF0969 /* MainViewController.swift in Sources */,
+				15AB17012A1CC8AB00A22378 /* Size.swift in Sources */,
 				154015152A1A5C0A00A61C57 /* CategoryCell.swift in Sources */,
 				154015212A1AA79600A61C57 /* BasketManager.swift in Sources */,
 				154015232A1AA9DE00A61C57 /* Extensions.swift in Sources */,
+				15AB17032A1CD3D000A22378 /* SuccessOrderViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

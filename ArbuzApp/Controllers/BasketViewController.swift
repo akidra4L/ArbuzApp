@@ -35,15 +35,7 @@ class BasketViewController: UIViewController {
         return tv
     } ()
     
-    private let registerOrderButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = Colors.buttonColor?.withAlphaComponent(0.8)
-        button.layer.cornerRadius = 12
-        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
-        button.titleLabel?.numberOfLines = 2
-        button.titleLabel?.textAlignment = .center
-        return button
-    } ()
+    private let registerOrderButton = CustomButton()
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -61,6 +53,7 @@ class BasketViewController: UIViewController {
         
         setUI()
         setupTableView()
+        setActions()
     }
     
     @objc private func productAddedToBasket(_ notification: Notification) {
@@ -88,6 +81,16 @@ class BasketViewController: UIViewController {
             basketTableView.isHidden = true
             registerOrderButton.isHidden = true
         }
+    }
+    
+    private func setActions() {
+        registerOrderButton.addTarget(self, action: #selector(goToPay), for: .touchUpInside)
+    }
+    
+    @objc private func goToPay() {
+        let orderDetailViewController = OrderDetailViewController()
+        orderDetailViewController.totalSum = getTotalSum()
+        self.navigationController?.present(UINavigationController(rootViewController: orderDetailViewController), animated: true)
     }
 }
 
