@@ -32,3 +32,11 @@
 In this project:
 
 - [UIKit](https://developer.apple.com/documentation/uikit)
+
+## Contact
+
+[Alikhan](https://www.instagram.com/gubayevv/) - jonasofan.gubaev@gmail.com
+
+Project Link: [ArbuzApp](https://github.com/akidra4L/ArbuzApp)
+
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/alikhan-gubayev-773855233/)
